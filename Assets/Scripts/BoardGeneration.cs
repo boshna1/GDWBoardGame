@@ -12,6 +12,8 @@ public class BoardGeneration : MonoBehaviour
     //Object variable to indicate board
     public GameObject Board;
 
+    [SerializeField] public PlayerMovement TileLand = new PlayerMovement();
+
     Quaternion Rotation;
     // Start is called before the first frame update
     void Start()
@@ -22,42 +24,56 @@ public class BoardGeneration : MonoBehaviour
 
         //initializes array with 100 cells, each containing a number indicating what type of tile it is (default, shop etc.)
         int[] Tile = new int[100];
+        
 
         //loop to generate the board with different tiles and guarentees shop at every 20 spaces
-        for (int i = 0; i <= 100; i++)
+        for (int i = 0; i < 99; i++)
         {
             //randomizes a number from 0-99
             int chance = UnityEngine.Random.Range(0, 99);
             Tile[i] = chance;
-
+            // Guarenteed End Tile at 100
+            if (i == 90)
+            {
+                Instantiate(EndTile, new Vector3(x, y), Rotation);
+                 
+            }
+            //Guarenteed Start Tile at 1
             if (i == 0)
             {
                 Instantiate(StartTile, new Vector3(x, y), Rotation);
+                TileLand.SetTileType(i, 2);
+            
             }
             // if number is from 0 - 9 generates Tile 1 (Move Back) 10% chance
             if (Tile[i] >= 0 && Tile[i] <= 10)
             {
                 Instantiate(MoveBackwardTile, new Vector2(x, y), Rotation);
+                TileLand.SetTileType(i, 3);
             }
             // if number is from 11 - 21 generates Tile 2 (Move Forward) 10% chance
             if (Tile[i] >= 11 && Tile[i] <= 21)
             {
                 Instantiate(MoveForwardTile, new Vector2(x, y), Rotation);
+                TileLand.SetTileType(i, 4);
             }
             // if number is from 22 - 42 generates Tile 3 (Lose Money) 20 % chance
             if (Tile[i] >= 22 && Tile[i] <= 42)
             {
                 Instantiate(MinusTile, new Vector2(x, y), Rotation);
+                TileLand.SetTileType(i, 5);
             }
             //if number is from 43 - 63 generates Tile 4 (Random Item) 20% chance
             if (Tile[i] >= 43 && Tile[i] <= 63)
             {
                 Instantiate(ItemTile, new Vector2(x, y), Rotation);
+                TileLand.SetTileType(i, 6);
             }
             //if number is from 63 - 103 generates Tile 5 (Gain Money) 40% chance
             if (Tile[i] >= 63 && Tile[i] <= 103)
             {
                 Instantiate(PlusMoney, new Vector2(x, y), Rotation);
+                TileLand.SetTileType(i, 7);
             }
             Debug.Log(x);
 
@@ -75,14 +91,15 @@ public class BoardGeneration : MonoBehaviour
                 {
                 Instantiate(TileShop, new Vector3(x,y), Rotation);
                 }
-            // Guarenteed End Tile at 100
-            if (i == 100)
-            {
-                Instantiate(EndTile, new Vector3(x, y), Rotation);
-            }
-            
-        }
 
+            TileLand.SetTileType(10, 1);
+            TileLand.SetTileType(30, 1);
+            TileLand.SetTileType(50, 1);
+            TileLand.SetTileType(70, 1);
+            TileLand.SetTileType(90, 1);
+            TileLand.SetTileType(99, 1);
+        }
+       
 
     }
 
@@ -91,4 +108,5 @@ public class BoardGeneration : MonoBehaviour
     {
         
     }
+
 }

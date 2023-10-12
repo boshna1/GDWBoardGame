@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    Vector2 _position;
-    Transform _trans;
+    Vector3 _position;
+    public Transform _trans;
 
     int _currentTile = 1;
 
     bool _isPlayerTurn;
+
+    int PlayerTilePos = 0;
 
     private void Start()
     {
@@ -52,5 +54,14 @@ public class Player : MonoBehaviour
     public void SetCurrentTile(int currentTile)
     {
         _currentTile = currentTile;
+    }
+
+    public int GetPlayerTilePos()
+    {
+        return PlayerTilePos;
+    }
+    public void AddPlayerTilePos(int ptp)
+    {
+        PlayerTilePos += ptp;
     }
 }

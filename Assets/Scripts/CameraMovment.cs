@@ -1,13 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
+using UnityEditor.U2D.Animation;
 using UnityEngine;
 using static UnityEditor.Experimental.GraphView.GraphView;
 
-public class Camera : MonoBehaviour
+public class CameraMovement : MonoBehaviour
 {
     [SerializeField] private List<Player> _player;
-    Transform camerapos;
-    bool playerturn = true;
+    int _currentPlayer = 0;
+    bool x = true;
+     
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,10 +21,7 @@ public class Camera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
 
-        if (playerturn == true)
-        {
-            
-        }
     }
 }
