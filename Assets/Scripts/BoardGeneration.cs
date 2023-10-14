@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 public class BoardGeneration : MonoBehaviour
@@ -13,6 +14,8 @@ public class BoardGeneration : MonoBehaviour
     public GameObject Board;
 
     public PlayerMovement TileLand = new PlayerMovement();
+
+    bool reverse = false;
 
     Quaternion Rotation;
     // Start is called before the first frame update
@@ -27,13 +30,13 @@ public class BoardGeneration : MonoBehaviour
         
 
         //loop to generate the board with different tiles and guarentees shop at every 20 spaces
-        for (int i = 0; i < 99; i++)
+        for (int i = 0; i < 100;)
         {
             //randomizes a number from 0-99
             int chance = UnityEngine.Random.Range(0, 99);
             Tile[i] = chance;
             // Guarenteed End Tile at 100
-            if (i == 90)
+            if (i == 99)
             {
                 Instantiate(EndTile, new Vector3(x, y), Rotation);
                  
@@ -76,27 +79,35 @@ public class BoardGeneration : MonoBehaviour
                 TileLand.SetTileType(i, 7);
             }
 
-            //increases x by 1 to move cursor one left
-            x += 1;
-
+            //increases x by 1 to move cursor one right
+            if (reverse == false)
+            {
+                x += 1;
+            }
+            if (reverse == true)
+            {
+                x -= 1;
+            }
             // parameter to reset x of cursor coordinate if it goes out of board and also goes up one
             if (x > 5)
             {
+                x = ((float)(9) / 2);
+                y++;
+                reverse = true;
+            }
+            if (x < -5)
+            {
                 x = ((float)(-9) / 2);
                 y++;
+                reverse = false;
             }
             // Guarenteed shop placement at 20,40,60,80
-            if (i == 18 || i == 38 || i == 58 || i == 78 || i == 98)
+            if (i == 9 || i == 29 || i == 49 || i == 69 || i == 89)
                 {
                 Instantiate(TileShop, new Vector3(x,y), Rotation);
-                }
-
-            TileLand.SetTileType(10, 1);
-            TileLand.SetTileType(30, 1);
-            TileLand.SetTileType(50, 1);
-            TileLand.SetTileType(70, 1);
-            TileLand.SetTileType(90, 1);
-            TileLand.SetTileType(99, 1);
+                TileLand.SetTileType(i + 1, 1);
+            }
+            i++;
         }
        
 

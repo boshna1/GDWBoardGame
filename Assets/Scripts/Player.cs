@@ -16,6 +16,8 @@ public class Player : MonoBehaviour
 
     int gold;
 
+    bool immune;
+
     private void Start()
     {
         _trans = GetComponent<Transform>();
@@ -76,6 +78,16 @@ public class Player : MonoBehaviour
     public int GetGold()
     {
         return gold;
+    }
+
+    public void SetisImmune()
+    {
+        immune = true;
+    }
+
+    public bool GetisImmune()
+    {
+        return immune;
     }
 
 }
