@@ -14,6 +14,8 @@ public class Player : MonoBehaviour
 
     int PlayerTilePos = 0;
 
+    int gold;
+
     private void Start()
     {
         _trans = GetComponent<Transform>();
@@ -65,4 +67,15 @@ public class Player : MonoBehaviour
     {
         PlayerTilePos += ptp;
     }
+
+    public void SetGold(int add)
+    {
+        gold += add;
+    }
+
+    public int GetGold()
+    {
+        return gold;
+    }
+
 }

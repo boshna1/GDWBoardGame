@@ -9,6 +9,8 @@ using Unity.VisualScripting.ReorderableList;
 using System.Threading.Tasks;
 using System;
 using Unity.VisualScripting;
+using System.Numerics;
+using Vector2 = UnityEngine.Vector2;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -50,7 +52,8 @@ public class PlayerMovement : MonoBehaviour
     public int[] TileType = new int[100];
     int currenttile;
 
-    
+    int TargetPlayer;
+    public bool GetKey;
 
     void Start()
     {
@@ -96,10 +99,10 @@ public class PlayerMovement : MonoBehaviour
             {
                 _text.color = Color.yellow;
             }
-            
+
             _text.text = "You rolled a " + Roll.Item1 + " and a " + Roll.Item2;
 
-            if (_tileMovementAmount == 0 && Clicked == true )
+            if (_tileMovementAmount == 0 && Clicked == true)
             {
                 //rolls die
                 Roll = _dice.RollDice();
@@ -107,7 +110,7 @@ public class PlayerMovement : MonoBehaviour
                 _tileMovementAmount = Roll.Item1 + Roll.Item2;
                 _turnStarted = true;
                 Clicked = false;
-                
+
             }
 
             if (_tileMovementAmount > 0 && !_isMoving)
@@ -123,111 +126,111 @@ public class PlayerMovement : MonoBehaviour
             }
 
             if (_tileMovementAmount == 0 && !_isMoving)
-                {
+            {
 
                 _text.text = "Choose an Action";
 
 
                 if (_turnStarted)
-                    { 
-                        _turnStarted = false;
+                {
+                    _turnStarted = false;
 
                     if (_currentPlayer == 3 && !_isMoving)
-                        {
-                            _currentPlayer = 0;
+                    {
+                        _currentPlayer = 0;
 
-                        }
-                        else
-                            _currentPlayer++;
                     }
-
+                    else
+                        _currentPlayer++;
                 }
+
             }
         }
+    }
 
-        void UpdatePosition()
+    void UpdatePosition()
+    {
+        _deltaT += Time.deltaTime / _totalTime;
+
+        if (_deltaT < 0f)
         {
-            _deltaT += Time.deltaTime / _totalTime;
-
-            if (_deltaT < 0f)
-            {
-                _deltaT = 0f;
-            }
-
-            if (_deltaT >= 1f || _nextPos == _currentPos)
-            {
-                _isMoving = false;
-                _tileMovementAmount--;
-                _deltaT = 0f;
-            }
-
-            _player[_currentPlayer].SetPosition(Vector2.Lerp(_currentPos, _nextPos, _deltaT));
+            _deltaT = 0f;
         }
 
-
-        void MoveOneTile(int player)
+        if (_deltaT >= 1f || _nextPos == _currentPos)
         {
-            if (player == 0)
-            { 
+            _isMoving = false;
+            _tileMovementAmount--;
+            _deltaT = 0f;
+        }
+
+        _player[_currentPlayer].SetPosition(Vector2.Lerp(_currentPos, _nextPos, _deltaT));
+    }
+
+
+    void MoveOneTile(int player)
+    {
+        if (player == 0)
+        {
             _nextPos = _board.GetTileRedPosition()[_player[_currentPlayer].GetCurrentTile()];
             _totalTime = (_nextPos - _currentPos / _speed).magnitude;
             _isMoving = true;
             _player[_currentPlayer].SetCurrentTile(_player[_currentPlayer].GetCurrentTile() + 1);
-            }
-            if (player == 1)
-            {
+        }
+        if (player == 1)
+        {
             _nextPos = _board.GetTileBluePosition()[_player[_currentPlayer].GetCurrentTile()];
             _totalTime = (_nextPos - _currentPos / _speed).magnitude;
             _isMoving = true;
             _player[_currentPlayer].SetCurrentTile(_player[_currentPlayer].GetCurrentTile() + 1);
-            }
-            if (player == 2)
-            {
+        }
+        if (player == 2)
+        {
             _nextPos = _board.GetTileGreenPosition()[_player[_currentPlayer].GetCurrentTile()];
             _totalTime = (_nextPos - _currentPos / _speed).magnitude;
             _isMoving = true;
             _player[_currentPlayer].SetCurrentTile(_player[_currentPlayer].GetCurrentTile() + 1);
-            }
-            if (player == 3)
-            {
+        }
+        if (player == 3)
+        {
             _nextPos = _board.GetTileYellowPosition()[_player[_currentPlayer].GetCurrentTile()];
             _totalTime = (_nextPos - _currentPos / _speed).magnitude;
             _isMoving = true;
             _player[_currentPlayer].SetCurrentTile(_player[_currentPlayer].GetCurrentTile() + 1);
-            }
         }
-        
-        //Attempted to use but was unsuccessful
-        void MoveBackOneTile(int player)
+    }
+
+    //Attempted to use but was unsuccessful
+    void MoveBackOneTile(int player)
+    {
+        if (player == 0)
         {
-            if (player == 0)
-            {
-            _nextPos = _board.GetTileRedPosition()[_player[_currentPlayer].GetCurrentTile() -1];
+            _nextPos = _board.GetTileRedPosition()[_player[_currentPlayer].GetCurrentTile() - 1];
             _totalTime = (_nextPos - _currentPos / _speed).magnitude;
             _isMoving = true;
             _player[_currentPlayer].SetCurrentTile(_player[_currentPlayer].GetCurrentTile());
-            }
-            if (player == 1)
-            {
-            _nextPos = _board.GetTileBluePosition()[_player[_currentPlayer].GetCurrentTile() -1 ];
+        }
+        if (player == 1)
+        {
+            _nextPos = _board.GetTileBluePosition()[_player[_currentPlayer].GetCurrentTile() - 1];
             _totalTime = (_nextPos - _currentPos / _speed).magnitude;
             _isMoving = true;
             _player[_currentPlayer].SetCurrentTile(_player[_currentPlayer].GetCurrentTile());
-            }
-            if (player == 2)
-            {
+        }
+        if (player == 2)
+        {
             _nextPos = _board.GetTileGreenPosition()[_player[_currentPlayer].GetCurrentTile() - 1];
             _totalTime = (_nextPos - _currentPos / _speed).magnitude;
             _isMoving = true;
             _player[_currentPlayer].SetCurrentTile(_player[_currentPlayer].GetCurrentTile());
-            }
-            if (player == 3)
-            {
+        }
+        if (player == 3)
+        {
             _nextPos = _board.GetTileYellowPosition()[_player[_currentPlayer].GetCurrentTile() - 1];
             _totalTime = (_nextPos - _currentPos / _speed).magnitude;
             _isMoving = true;
             _player[_currentPlayer].SetCurrentTile(_player[_currentPlayer].GetCurrentTile());
-            }
+        }
     }
 
     //linked to roll butotn
@@ -237,7 +240,7 @@ public class PlayerMovement : MonoBehaviour
         Debug.Log("click");
     }
 
-    public void SetTileType(int i,int type)
+    public void SetTileType(int i, int type)
     {
         TileType[i] = type;
     }
@@ -246,7 +249,7 @@ public class PlayerMovement : MonoBehaviour
         return TileType[i];
     }
 
-    
+
 
     //Attempted to use, had many problems with using. Moving too many times, not moving at all etc.
     void CheckTileInteract()
@@ -292,8 +295,180 @@ public class PlayerMovement : MonoBehaviour
 
         }
 
+        /*
+        public void steal()
+        {
+
+            Debug.Log("Pick who to steal from: Press the number corresponding to player number");
+
+            if (Input.GetKey(KeyCode.1))
+            {
+                if (TargetPlayer == 0)
+                {
+                    _player[0].SetGold(-5);
+                    _player[_currentPlayer].SetGold(5);
+                }
+            }
+            if (Input.GetKey(KeyCode.2))
+            {
+                if (TargetPlayer == 1)
+                {
+                    _player[1].SetGold(-5);
+                    _player[_currentPlayer].SetGold(5);
+                }
+            }
+
+            if (Input.GetKey(KeyCode.3))
+            {
+                if (TargetPlayer == 2)
+                {
+                    _player[2].SetGold(-5);
+                    _player[_currentPlayer].SetGold(5);
+                }
+            }
+
+
+            if (Input.GetKey(KeyCode.4))
+            {
+                if (TargetPlayer == 3)
+                {
+                    _player[3].SetGold(-5);
+                    _player[_currentPlayer].SetGold(5);
+                }
+            }
+        }
+
+        public void dash()
+        {
+            public int Roll3 = Random.Range(1, 6);
+        }
+
+        public void shove()
+    {
+
+        Debug.Log("Pick who to shove: Press the number corresponding to player number");
+
+        if (Input.GetKey(KeyCode.1))
+        {
+            player == 0;
+            if (player == 0)
+            {
+                _nextPos = _board.GetTileRedPosition()[_player[0].GetCurrentTile() - 3];
+                _totalTime = (_nextPos - _currentPos / _speed).magnitude;
+                _isMoving = true;
+                _player[_currentPlayer].SetCurrentTile(_player[0].GetCurrentTile());
+            }
+        }
+        if (Input.GetKey(KeyCode.2))
+        {
+            player == 1;
+            if (player == 1)
+            {
+                _nextPos = _board.GetTileRedPosition()[_player[1].GetCurrentTile() - 3];
+                _totalTime = (_nextPos - _currentPos / _speed).magnitude;
+                _isMoving = true;
+                _player[_currentPlayer].SetCurrentTile(_player[1].GetCurrentTile());
+            }
+        }
+
+        if (Input.GetKey(KeyCode.3))
+        {
+            _player == 2;
+            if (player == 2)
+            {
+                _nextPos = _board.GetTileRedPosition()[_player[2].GetCurrentTile() - 3];
+                _totalTime = (_nextPos - _currentPos / _speed).magnitude;
+                _isMoving = true;
+                _player[_currentPlayer].SetCurrentTile(_player[2].GetCurrentTile());
+            }
+        }
+
+
+        if (Input.GetKey(KeyCode.4))
+        {
+            player == 3;
+            if (player == 3)
+            {
+                _nextPos = _board.GetTileRedPosition()[_player[3].GetCurrentTile() - 3];
+                _totalTime = (_nextPos - _currentPos / _speed).magnitude;
+                _isMoving = true;
+                _player[_currentPlayer].SetCurrentTile(_player[3].GetCurrentTile());
+            }
+        }
+    }
+
+
+    public void dupelicate()
+    {
+           public int TotalRoll = TotalRoll * 2;
+        }
+
+        public void block()
+        {
+           public bool immune = true;
+
+    if (immune = true)
+        {
+            Abilites.cancel;
+        }
+        }
+
+        public void strike()
+    {
+        Debug.Log("Pick who to strike: Press the number corresponding to player number");
+
+        if (Input.GetKey(KeyCode.1))
+        {
+            player == 0;
+            if (player == 0)
+            {
+                _nextPos = _board.GetTileRedPosition()[_player[0].GetCurrentTile() - 3];
+                _totalTime = (_nextPos - _currentPos / _speed).magnitude;
+                _isMoving = true;
+                _player[_currentPlayer].SetCurrentTile(_player[0].GetCurrentTile());
+            }
+        }
+        if (Input.GetKey(KeyCode.2))
+        {
+            player == 1;
+            if (player == 1)
+            {
+                _nextPos = _board.GetTileRedPosition()[_player[1].GetCurrentTile() - 3];
+                _totalTime = (_nextPos - _currentPos / _speed).magnitude;
+                _isMoving = true;
+                _player[_currentPlayer].SetCurrentTile(_player[1].GetCurrentTile());
+            }
+        }
+
+        if (Input.GetKey(KeyCode.3))
+        {
+            _player == 2;
+            if (player == 2)
+            {
+                _nextPos = _board.GetTileRedPosition()[_player[2].GetCurrentTile() - 3];
+                _totalTime = (_nextPos - _currentPos / _speed).magnitude;
+                _isMoving = true;
+                _player[_currentPlayer].SetCurrentTile(_player[2].GetCurrentTile());
+            }
+        }
+
+
+        if (Input.GetKey(KeyCode.4))
+        {
+            player == 3;
+            if (player == 3)
+            {
+                _nextPos = _board.GetTileRedPosition()[_player[3].GetCurrentTile() - 3];
+                _totalTime = (_nextPos - _currentPos / _speed).magnitude;
+                _isMoving = true;
+                _player[_currentPlayer].SetCurrentTile(_player[3].GetCurrentTile());
+            }
+        }
+
+        }*/
     }
 }
+
 
 
 
