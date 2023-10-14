@@ -201,28 +201,28 @@ public class PlayerMovement : MonoBehaviour
         {
             if (player == 0)
             {
-            _nextPos = _board.GetTileRedPosition()[_player[_currentPlayer].GetCurrentTile()];
+            _nextPos = _board.GetTileRedPosition()[_player[_currentPlayer].GetCurrentTile() -1];
             _totalTime = (_nextPos - _currentPos / _speed).magnitude;
             _isMoving = true;
             _player[_currentPlayer].SetCurrentTile(_player[_currentPlayer].GetCurrentTile());
             }
             if (player == 1)
             {
-            _nextPos = _board.GetTileBluePosition()[_player[_currentPlayer].GetCurrentTile()];
+            _nextPos = _board.GetTileBluePosition()[_player[_currentPlayer].GetCurrentTile() -1 ];
             _totalTime = (_nextPos - _currentPos / _speed).magnitude;
             _isMoving = true;
             _player[_currentPlayer].SetCurrentTile(_player[_currentPlayer].GetCurrentTile());
             }
             if (player == 2)
             {
-            _nextPos = _board.GetTileGreenPosition()[_player[_currentPlayer].GetCurrentTile()];
+            _nextPos = _board.GetTileGreenPosition()[_player[_currentPlayer].GetCurrentTile() - 1];
             _totalTime = (_nextPos - _currentPos / _speed).magnitude;
             _isMoving = true;
             _player[_currentPlayer].SetCurrentTile(_player[_currentPlayer].GetCurrentTile());
             }
             if (player == 3)
             {
-            _nextPos = _board.GetTileYellowPosition()[_player[_currentPlayer].GetCurrentTile()];
+            _nextPos = _board.GetTileYellowPosition()[_player[_currentPlayer].GetCurrentTile() - 1];
             _totalTime = (_nextPos - _currentPos / _speed).magnitude;
             _isMoving = true;
             _player[_currentPlayer].SetCurrentTile(_player[_currentPlayer].GetCurrentTile());
@@ -268,13 +268,11 @@ public class PlayerMovement : MonoBehaviour
         if (playerspot == 3)
         {
             MoveBackOneTile(_currentPlayer);
-            MoveBackOneTile(_currentPlayer);
             UpdatePosition();
             playerspot = 0;
         }
         if (playerspot == 4)
         {
-            MoveOneTile(_currentPlayer);
             MoveOneTile(_currentPlayer);
             UpdatePosition();
             playerspot = 0;
