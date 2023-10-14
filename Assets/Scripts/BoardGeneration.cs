@@ -12,11 +12,11 @@ public class BoardGeneration : MonoBehaviour
     //Object variable to indicate board
     public GameObject Board;
 
-    [SerializeField] public PlayerMovement TileLand = new PlayerMovement();
+    public PlayerMovement TileLand = new PlayerMovement();
 
     Quaternion Rotation;
     // Start is called before the first frame update
-    private void Start()
+    void Start()
     {
         //Iinitializes starting point for tile generation
         x = ((float)(-9) / 2);
@@ -43,7 +43,7 @@ public class BoardGeneration : MonoBehaviour
             {
                 Instantiate(StartTile, new Vector3(x, y), Rotation);
                 TileLand.SetTileType(i, 2);
-            
+                Debug.Log("Success");
             }
             // if number is from 0 - 9 generates Tile 1 (Move Back) 10% chance
             if (Tile[i] >= 0 && Tile[i] <= 10)

@@ -7,16 +7,16 @@ public class CharacterProfile : MonoBehaviour
     //holds CharacterSprites
     public GameObject[] CharacterPFPSpr = new GameObject[12];
     //Holds character pfp location on sidebars
-    public Transform[] CharacterPFP = new Transform[3];
+    public Transform[] CharacterPFP = new Transform[4];
 
     //holds character value corresponding to a class
     public int[] Character = new int[4];
 
     //holds location of each characters abilities
-    public Transform[] Char1Ability = new Transform[1];
-    public Transform[] Char2Ability = new Transform[1];
-    public Transform[] Char3Ability = new Transform[1];
-    public Transform[] Char4Ability = new Transform[1];
+    public Transform[] Char1Ability = new Transform[2];
+    public Transform[] Char2Ability = new Transform[2];
+    public Transform[] Char3Ability = new Transform[2];
+    public Transform[] Char4Ability = new Transform[2];
 
     //holds ability sprites
     public GameObject[] Abilities = new GameObject[6];

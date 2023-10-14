@@ -2711,9 +2711,8 @@ GameObject:
   m_Component:
   - component: {fileID: 739694787}
   - component: {fileID: 739694786}
-  - component: {fileID: 739694788}
-  - component: {fileID: 739694789}
-  - component: {fileID: 739694790}
+  - component: {fileID: 739694793}
+  - component: {fileID: 739694792}
   - component: {fileID: 739694791}
   m_Layer: 0
   m_Name: Game Board Transparent
@@ -2790,7 +2789,7 @@ Transform:
   - {fileID: 2100745168}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &739694788
+--- !u!114 &739694791
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2799,22 +2798,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 739694785}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fdab01c319dd1344bd2ac6c4e082c93, type: 3}
+  m_Script: {fileID: 11500000, guid: 14b7325a801e42c499b771344d2d3b2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  x: 0
-  y: 0
-  MoveBackwardTile: {fileID: 2026620066}
-  MoveForwardTile: {fileID: 413540558}
-  MinusTile: {fileID: 1242121233}
-  ItemTile: {fileID: 735672978}
-  PlusMoney: {fileID: 241664542}
-  TileShop: {fileID: 1998378910}
-  EndTile: {fileID: 923167077}
-  StartTile: {fileID: 1096606714}
-  Board: {fileID: 739694785}
-  TileLand: {fileID: 739694789}
---- !u!114 &739694789
+  _initialTransform: {fileID: 739694787}
+--- !u!114 &739694792
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2823,40 +2811,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 739694785}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 140080431d7a2fd4bb61b2a54c1c04ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _player:
-  - {fileID: 176611514}
-  - {fileID: 823762520}
-  - {fileID: 856057856}
-  - {fileID: 2145756298}
-  _speed: 2
-  _board: {fileID: 739694791}
-  _text: {fileID: 1752982931}
-  _currentPos: {x: 0, y: 0}
-  _nextPos: {x: 0, y: 0}
-  _totalTime: 0
-  _deltaT: 0
-  _isMoving: 0
-  _gameIsOver: 0
-  _turnStarted: 0
-  _currentPlayer: 0
-  _tileMovementAmount: 0
-  button: {fileID: 2071653806}
-  Clicked: 0
-  TileType: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-  currenttile: 0
---- !u!114 &739694790
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 739694785}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 826d01f97e7a0354a9c682f1dd2f6ff4, type: 3}
+  m_Script: {fileID: 11500000, guid: 384da4e8ee399ba4aa0bb83a6926390e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   CharacterPFPSpr:
@@ -2890,16 +2845,6 @@ MonoBehaviour:
   Char4Ability:
   - {fileID: 1645790181}
   - {fileID: 1604290896}
-  Items:
-  - {fileID: 2057951569}
-  - {fileID: 588390217}
-  - {fileID: 1782412694}
-  - {fileID: 1451245313}
-  - {fileID: 1524654154}
-  - {fileID: 1930027286}
-  - {fileID: 1893870007}
-  - {fileID: 2145837367}
-  - {fileID: 1437593496}
   Abilities:
   - {fileID: 755403058}
   - {fileID: 1001277721}
@@ -2907,22 +2852,6 @@ MonoBehaviour:
   - {fileID: 1508559920}
   - {fileID: 1122615471}
   - {fileID: 1032947724}
-  Char1Item:
-  - {fileID: 1963419529}
-  - {fileID: 2015811783}
-  - {fileID: 249927554}
-  Char2Item:
-  - {fileID: 99511153}
-  - {fileID: 44346813}
-  - {fileID: 1056800172}
-  Char3Item:
-  - {fileID: 1547093886}
-  - {fileID: 1186125158}
-  - {fileID: 1471778509}
-  Char4Item:
-  - {fileID: 844660283}
-  - {fileID: 560416516}
-  - {fileID: 639853348}
   CharacterPiece:
   - {fileID: 302709342}
   - {fileID: 1338401196}
@@ -2941,8 +2870,7 @@ MonoBehaviour:
   - {fileID: 823762519}
   - {fileID: 856057855}
   - {fileID: 2145756297}
-  Choop: {fileID: 0}
---- !u!114 &739694791
+--- !u!114 &739694793
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2951,10 +2879,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 739694785}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14b7325a801e42c499b771344d2d3b2c, type: 3}
+  m_Script: {fileID: 11500000, guid: 0fdab01c319dd1344bd2ac6c4e082c93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _initialTransform: {fileID: 739694787}
+  x: 0
+  y: 0
+  MoveBackwardTile: {fileID: 2026620066}
+  MoveForwardTile: {fileID: 413540558}
+  MinusTile: {fileID: 1242121233}
+  ItemTile: {fileID: 735672978}
+  PlusMoney: {fileID: 241664542}
+  TileShop: {fileID: 1998378910}
+  EndTile: {fileID: 923167077}
+  StartTile: {fileID: 1096606714}
+  Board: {fileID: 739694785}
+  TileLand: {fileID: 0}
 --- !u!1 &755403058
 GameObject:
   m_ObjectHideFlags: 0
@@ -3514,7 +3453,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.85, y: 0.85, z: 1.505752}
+  m_LocalScale: {x: 0.8500001, y: 0.8500001, z: 1.505752}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1737635130}
@@ -3559,7 +3498,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 5
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 2830c9d8b94e33747af08f13b217418a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -4353,7 +4292,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 5
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 22e39d1536d730343b78f88fd078b561, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -6424,8 +6363,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1737635128}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -14.245, y: 1.898, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -14.245, y: 1.8980001, z: 0}
   m_LocalScale: {x: 0.66412, y: 0.66412, z: 0.66412}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7273,7 +7212,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: e6f0b7f181c338e47b9d1d348dfdd2b6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -7792,7 +7731,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 739694789}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
         m_MethodName: DiceClick
         m_Mode: 1
