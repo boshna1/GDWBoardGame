@@ -2466,7 +2466,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: fd71a2e7220472f40beb217b019ca5eb, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -2833,7 +2833,7 @@ MonoBehaviour:
   - {fileID: 275833902}
   - {fileID: 1336512287}
   - {fileID: 2017784609}
-  Character: 00000000000000000000000000000000
+  Character: 00000000030000000600000009000000
   Char1Ability:
   - {fileID: 649365729}
   - {fileID: 72306296}
@@ -2907,8 +2907,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84015232c76abf1439e88048b3d3933d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _player: []
-  _speed: 0
+  _player:
+  - {fileID: 176611514}
+  - {fileID: 823762520}
+  - {fileID: 856057856}
+  - {fileID: 2145756298}
+  _speed: 2
   _board: {fileID: 739694791}
   _text: {fileID: 1752982931}
   button: {fileID: 2071653806}
@@ -7782,8 +7786,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -480.43887, y: -233.0546}
-  m_SizeDelta: {x: 1825.2034, y: 154.3313}
+  m_AnchoredPosition: {x: -477.11505, y: -225.81346}
+  m_SizeDelta: {x: 1720.0278, y: 111.1945}
   m_Pivot: {x: 0.49999958, y: 0.5000013}
 --- !u!114 &2071653806
 MonoBehaviour:

@@ -36,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
     bool _turnStarted;
 
     int _currentPlayer = 0;
-    int _tileMovementAmount;
+    int _tileMovementAmount = 0;
 
     //Dice script variables and class initialization
     Die _dice = new Die();
@@ -64,7 +64,7 @@ public class PlayerMovement : MonoBehaviour
 
     void CheckWin()
     {
-        if ((_player[0].GetCurrentTile() == 99 || _player[1].GetCurrentTile() == 99 || _player[2].GetCurrentTile() == 99 || _player[3].GetCurrentTile() == 99 && !_isMoving))
+        if ((_player[0].GetCurrentTile() == 99 || _player[1].GetCurrentTile() == 99 || _player[2].GetCurrentTile() == 99 || _player[3].GetCurrentTile() == 99) && !_isMoving)
         {
             _gameIsOver = true;
             _text.text = $"Game Over! Player {_currentPlayer + 1} Wins!";
@@ -96,17 +96,18 @@ public class PlayerMovement : MonoBehaviour
             {
                 _text.color = Color.yellow;
             }
-            _text.text = "Choose an Action";
             
-            
+            _text.text = "You rolled a " + Roll.Item1 + " and a " + Roll.Item2;
+
             if (_tileMovementAmount == 0 && Clicked == true )
             {
                 //rolls die
                 Roll = _dice.RollDice();
+                Debug.Log(Roll);
                 _tileMovementAmount = Roll.Item1 + Roll.Item2;
                 _turnStarted = true;
                 Clicked = false;
-
+                
             }
 
             if (_tileMovementAmount > 0 && !_isMoving)
@@ -123,7 +124,7 @@ public class PlayerMovement : MonoBehaviour
 
             if (_tileMovementAmount == 0 && !_isMoving)
                 {
-                CheckTileInteract();
+
                 _text.text = "Choose an Action";
 
 
@@ -131,7 +132,7 @@ public class PlayerMovement : MonoBehaviour
                     { 
                         _turnStarted = false;
 
-                    if (_currentPlayer == 3 && !_isMoving && _turnStarted == false)
+                    if (_currentPlayer == 3 && !_isMoving)
                         {
                             _currentPlayer = 0;
 
@@ -233,6 +234,7 @@ public class PlayerMovement : MonoBehaviour
     public void DiceClick()
     {
         Clicked = true;
+        Debug.Log("click");
     }
 
     public void SetTileType(int i,int type)
