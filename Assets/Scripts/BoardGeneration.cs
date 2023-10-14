@@ -16,7 +16,7 @@ public class BoardGeneration : MonoBehaviour
 
     Quaternion Rotation;
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         //Iinitializes starting point for tile generation
         x = ((float)(-9) / 2);
@@ -75,7 +75,6 @@ public class BoardGeneration : MonoBehaviour
                 Instantiate(PlusMoney, new Vector2(x, y), Rotation);
                 TileLand.SetTileType(i, 7);
             }
-            Debug.Log(x);
 
             //increases x by 1 to move cursor one left
             x += 1;
@@ -101,12 +100,6 @@ public class BoardGeneration : MonoBehaviour
         }
        
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
 }
