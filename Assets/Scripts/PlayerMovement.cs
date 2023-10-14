@@ -64,10 +64,10 @@ public class PlayerMovement : MonoBehaviour
 
     void CheckWin()
     {
-        if ((_player[0].GetCurrentTile() == 100 || _player[1].GetCurrentTile() == 100 && !_isMoving))
+        if ((_player[0].GetCurrentTile() == 99 || _player[1].GetCurrentTile() == 99 || _player[2].GetCurrentTile() == 99 || _player[3].GetCurrentTile() == 99 && !_isMoving))
         {
             _gameIsOver = true;
-            _text.text = $"Game Over! Player {_currentPlayer + 1} Wins! Press 'Space' to play again!";
+            _text.text = $"Game Over! Player {_currentPlayer + 1} Wins!";
         }
     }
 
