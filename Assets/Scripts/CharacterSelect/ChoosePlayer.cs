@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.TextCore.Text;
 
 public class ChoosePlayer : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class ChoosePlayer : MonoBehaviour
     public static int player1choice, player2choice, player3choice, player4choice;
 
     static int[] Character = new int[4];
+
+    [SerializeField] private static List<Player> _player;
 
     // Start is called before the first frame update
     void Start()
@@ -30,7 +33,8 @@ public class ChoosePlayer : MonoBehaviour
     {
         //displays set of sprites depending on what player is choosing
         playerText.text = "Player " + (currentplayer + 1);
-        if (currentplayer == 1) 
+
+        if (currentplayer == 1)
         {
             Instantiate(SpritePFP[3], transform1);
             Instantiate(SpritePFP[4], transform2);
@@ -58,7 +62,7 @@ public class ChoosePlayer : MonoBehaviour
     //functions that pass a value depending on what class the player picks and which player
     public void ChooseKnight()
     {
-        if (currentplayer == 0) 
+        if (currentplayer == 0)
         {
             player1choice = 0;
         }
@@ -73,7 +77,7 @@ public class ChoosePlayer : MonoBehaviour
         if (currentplayer == 3)
         {
             player4choice = 9;
-            
+
         }
         currentplayer++;
     }
@@ -81,7 +85,7 @@ public class ChoosePlayer : MonoBehaviour
     {
         if (currentplayer == 0)
         {
-            player1choice = 1;
+            player4choice = 1;
         }
         if (currentplayer == 1)
         {
@@ -101,7 +105,7 @@ public class ChoosePlayer : MonoBehaviour
     {
         if (currentplayer == 0)
         {
-            player1choice = 2;
+            player4choice = 2;
         }
         if (currentplayer == 1)
         {
@@ -124,9 +128,11 @@ public class ChoosePlayer : MonoBehaviour
         Character[2] = type3;
         Character[3] = type4;
     }
-
     public int[] GetCharacterType()
-    {
-        return Character;
+    { 
+    return Character; 
     }
+    
+    
 }
+

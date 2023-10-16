@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Collections.LowLevel.Unsafe;
 using Unity.Jobs;
 using UnityEngine;
 
@@ -17,6 +18,11 @@ public class Player : MonoBehaviour
     int gold;
 
     bool immune;
+
+    GameObject[] Item = new GameObject[3];
+
+    int speed;
+
 
     private void Start()
     {
@@ -70,7 +76,7 @@ public class Player : MonoBehaviour
         PlayerTilePos += ptp;
     }
 
-    public void SetGold(int add)
+    public void AddGold(int add)
     {
         gold += add;
     }
@@ -80,9 +86,9 @@ public class Player : MonoBehaviour
         return gold;
     }
 
-    public void SetisImmune()
+    public void SetisImmune(bool torf)
     {
-        immune = true;
+        immune = torf;
     }
 
     public bool GetisImmune()
@@ -90,4 +96,13 @@ public class Player : MonoBehaviour
         return immune;
     }
 
+    public void AddSpeed(int amount)
+    {
+        speed += amount;
+    }
+
+    public int GetSpeed()
+    {
+        return speed;
+    }
 }

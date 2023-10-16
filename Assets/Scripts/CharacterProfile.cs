@@ -9,6 +9,8 @@ public class CharacterProfile : MonoBehaviour
     //Holds character pfp location on sidebars
     public Transform[] CharacterPFP = new Transform[4];
 
+    [SerializeField] private List<Player> _player;
+
     //holds character value corresponding to a class
     public int[] Character = new int[4];
 
@@ -69,7 +71,7 @@ public class CharacterProfile : MonoBehaviour
             }
             if (Character[x] == 4)
             {
-                    Instantiate(CharacterPFPSpr[4], CharacterPFP[1]);
+                Instantiate(CharacterPFPSpr[4], CharacterPFP[1]);
                 Instantiate(Abilities[2], Char2Ability[0]);
                 Instantiate(Abilities[3], Char2Ability[1]);
                 Instantiate(CharacterPiece[4], GamePiece[1]);
@@ -77,7 +79,7 @@ public class CharacterProfile : MonoBehaviour
             }
             if (Character[x] == 5)
             {
-                    Instantiate(CharacterPFPSpr[5], CharacterPFP[1]);
+                Instantiate(CharacterPFPSpr[5], CharacterPFP[1]);
                 Instantiate(Abilities[4], Char2Ability[0]);
                 Instantiate(Abilities[5], Char2Ability[1]);
                 Instantiate(CharacterPiece[5], GamePiece[1]);

@@ -1,4 +1,4 @@
-/*using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using UnityEngine;
@@ -13,13 +13,17 @@ public class ShopScript : MonoBehaviour
 
     private List<Vector2> displayLocations = new List<Vector2>() { new Vector2(-2.97f, -2.94f), new Vector2(-0.3f, -2.94f), new Vector2(2.37f, -2.94f) };
 
-    private PlayerMovement playerMovement;
-    private int playerTurn = playerMovement._currentPlayer;
+    public PlayerMovement playerMovement = new PlayerMovement();
+    public int playerTurn;
+
+    
 
     private List<GameObject> inventoryItems1 = new List<GameObject>();
     private List<GameObject> inventoryItems2 = new List<GameObject>();
     private List<GameObject> inventoryItems3 = new List<GameObject>();
     private List<GameObject> inventoryItems4 = new List<GameObject>();
+
+    [SerializeField] private List<Player> _player;
 
     void DisplayItems()
     {
@@ -37,6 +41,7 @@ public class ShopScript : MonoBehaviour
 
     public void OnItemClick(GameObject clickedItem)
     {
+        playerTurn = playerMovement.GetCurrentPlayer();
         if (playerTurn == 0)
         {
             AddToInventory1(clickedItem);
@@ -168,5 +173,21 @@ public class ShopScript : MonoBehaviour
             }
         }
     }
+
+    public List<GameObject> GetInv1()
+    {
+        return inventoryItems1;
+    }
+    public List<GameObject> GetInv2()
+    {
+        return inventoryItems2;
+    }
+    public List<GameObject> GetInv3()
+    {
+        return inventoryItems3;
+    }
+    public List<GameObject> GetInv4()
+    {
+        return inventoryItems4;
+    }
 }
-*/

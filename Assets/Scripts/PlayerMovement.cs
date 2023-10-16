@@ -22,9 +22,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private List<Player> _player;
     public float _speed;
 
+    ShopScript SS = new ShopScript();
+
     //initializes board and text 
     [SerializeField] private Board _board;
-    [SerializeField] private Text _text;
+    [SerializeField] private Text _text,_text2;
 
 
     //variables for movement
@@ -97,31 +99,40 @@ public class PlayerMovement : MonoBehaviour
             if (_currentPlayer == 0)
             {
                 _text.color = Color.red;
+                _text2.color = Color.red;
             }
             if (_currentPlayer == 1)
             {
                 _text.color = Color.blue;
+                _text2.color = Color.blue;
             }
             if (_currentPlayer == 2)
             {
                 _text.color = Color.green;
+                _text2.color = Color.green;
             }
             if (_currentPlayer == 3)
             {
                 _text.color = Color.yellow;
+                _text2.color = Color.yellow;
             }
-
-            _text.text = "You rolled a " + Roll.Item1 + " and a " + Roll.Item2;
-
+            _text.text = "Choose an Action";
+            _text2.text = "You rolled a " + Roll.Item1 + " and a " + Roll.Item2;
+            SetCurrentPlayer(_currentPlayer);
             if (_tileMovementAmount == 0 && Clicked == true)
             {
                 //rolls die
                 Roll = _dice.RollDice();
                 Debug.Log(Roll);
-                _tileMovementAmount = Roll.Item1 + Roll.Item2 + Roll3;
+                _tileMovementAmount = Roll.Item1 + Roll.Item2 + Roll3 + _player[_currentPlayer].GetSpeed();
+                if (_player[_currentPlayer].GetSpeed() < 1)
+                {
+                    _player[_currentPlayer].AddSpeed(1);
+                }
                 _turnStarted = true;
                 Clicked = false;
                 Interacted = false;
+
 
             }
 
@@ -129,7 +140,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 //moves player and counts amount moved
                 MoveOneTile(_currentPlayer);
-                    currenttile++;
+                currenttile++;
             }
 
             if (_isMoving)
@@ -137,19 +148,21 @@ public class PlayerMovement : MonoBehaviour
                 UpdatePosition();
             }
 
-            if (_tileMovementAmount == 0 && _turnStarted == true && Interacted == false) 
+            if (_tileMovementAmount == 0 && _turnStarted == true && Interacted == false)
             {
                 CheckTileInteract();
-                if (playerspot == 0)
-                {
-                }
-                if (playerspot == 2)
-                {
-
-                }
                 if (playerspot == 3)
                 {
-                    _tileMovementAmount = 1;
+                    _player[_currentPlayer].SetPosition(_player[_currentPlayer].GetPosition() + new Vector2(-1f, 0f));
+                }
+                if (_player[_currentPlayer].GetPosition().x < -5)
+                {
+                    _player[_currentPlayer].SetPosition(_player[_currentPlayer].GetPosition() + new Vector2(1f, -1f));
+                }
+                if (_player[_currentPlayer].GetPosition().x > 5)
+                {
+                    _player[_currentPlayer].SetPosition(_player[_currentPlayer].GetPosition() + new Vector2(-1f, -1f));
+
                     _isMoving = false;
                 }
                 if (playerspot == 4)
@@ -159,7 +172,7 @@ public class PlayerMovement : MonoBehaviour
                 }
                 if (playerspot == 5)
                 {
-
+                    _player[_currentPlayer].AddGold(-3);
                 }
                 if (playerspot == 6)
                 {
@@ -167,7 +180,7 @@ public class PlayerMovement : MonoBehaviour
                 }
                 if (playerspot == 7)
                 {
-
+                    _player[_currentPlayer].AddGold(3);
                 }
                 playerspot = 0;
                 Interacted = true;
@@ -192,10 +205,11 @@ public class PlayerMovement : MonoBehaviour
                     else
                         _currentPlayer++;
                 }
-
+                _player[_currentPlayer].SetisImmune(false);
             }
         }
     }
+
 
     void UpdatePosition()
     {
@@ -249,38 +263,6 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    //Attempted to use but was unsuccessful
-    void MoveBackOneTile(int player)
-    {
-        if (player == 0)
-        {
-            _totalTime = (_nextPos - _currentPos / _speed).magnitude;
-            _isMoving = true;
-            _player[0].SetCurrentTile(_player[0].GetCurrentTile() - 1);
-            UpdatePosition();
-        }
-        if (player == 1)
-        {
-            _totalTime = (_nextPos - _currentPos / _speed).magnitude;
-            _isMoving = true;
-            _player[1].SetCurrentTile(_player[1].GetCurrentTile() - 1);
-            UpdatePosition();
-        }
-        if (player == 2)
-        {
-            _totalTime = (_nextPos - _currentPos / _speed).magnitude;
-            _isMoving = true;
-            _player[2].SetCurrentTile(_player[2].GetCurrentTile() - 1);
-            UpdatePosition();
-        }
-        if (player == 3)
-        {
-            _totalTime = (_nextPos - _currentPos / _speed).magnitude;
-            _isMoving = true;
-            _player[3].SetCurrentTile(_player[3].GetCurrentTile() - 1);
-        }
-    }
-
     //linked to roll butotn
     public void DiceClick()
     {
@@ -312,76 +294,20 @@ public class PlayerMovement : MonoBehaviour
         currenttile = 0;
         
     }
-    public void stealP1()
-    {
-        _player[0].SetGold(-5);
-        _player[_currentPlayer].SetGold(5);
-    }
-    public void stealP2()
-    {
-
-        _player[1].SetGold(-5);
-        _player[_currentPlayer].SetGold(+5);
-    }
-    public void stealP3()
-    {
-        _player[2].SetGold(-5);
-        _player[_currentPlayer].SetGold(+5);
-    }
-    public void stealP4()
-    {
-
-        _player[3].SetGold(-5);
-        _player[_currentPlayer].SetGold(+5);
-
-    }
-    public void dash()
-    {
-        int Roll3 = Random.Range(1, 6);
-    }
-    public void shoveP1()
-    {
-        _nextPos = _board.GetTileRedPosition()[_player[0].GetCurrentTile()];
-        _totalTime = (_nextPos - _currentPos / _speed).magnitude;
-        _isMoving = true;
-        _player[0].SetCurrentTile(_player[0].GetCurrentTile() - 1);
-        UpdatePosition();
-    }
-    public void shoveP2()
-    {
-        _nextPos = _board.GetTileBluePosition()[_player[1].GetCurrentTile()];
-        _totalTime = (_nextPos - _currentPos / _speed).magnitude;
-        _isMoving = true;
-        _player[1].SetCurrentTile(_player[1].GetCurrentTile() - 1);
-        UpdatePosition();
-
-    }
-    public void shoveP3()
-    {
-        _nextPos = _board.GetTileGreenPosition()[_player[2].GetCurrentTile()];
-        _totalTime = (_nextPos - _currentPos / _speed).magnitude;
-        _isMoving = true;
-        _player[2].SetCurrentTile(_player[2].GetCurrentTile() - 1);
-        UpdatePosition();
-    }
-    public void shoveP4()
-    {
-        _nextPos = _board.GetTileYellowPosition()[_player[3].GetCurrentTile()];
-        _totalTime = (_nextPos - _currentPos / _speed).magnitude;
-        _isMoving = true;
-        _player[3].SetCurrentTile(_player[3].GetCurrentTile() - 1);
-        UpdatePosition();
-    }
-    public void duplicate()
-    {
-        dupe = _tileMovementAmount * 2;
    
-    }
-    public void block()
+    public void SetRoll3(int rolled)
     {
-        immune = true;
+        Roll3 = rolled;
     }
 
+    public void SetCurrentPlayer(int input)
+    {
+        _currentPlayer = input;
+    }
+    public int GetCurrentPlayer()
+    {
+        return _currentPlayer;
+    }
 
 }
 
