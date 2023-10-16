@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
 
     int PlayerTilePos = 0;
 
-    int gold;
+    int gold = 0;
 
     bool immune;
 

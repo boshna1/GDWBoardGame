@@ -28,6 +28,9 @@ public class CharacterProfile : MonoBehaviour
     //holds character position for board
     public Transform[] GamePiece = new Transform[4];
 
+    public GameObject[] Items = new GameObject[12];
+    public Transform[] ItemTrans = new Transform[12];
+
     //class initialization to get class selection variables
     ChoosePlayer Choop = new ChoosePlayer();
  

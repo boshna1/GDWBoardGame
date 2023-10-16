@@ -77,6 +77,13 @@ public class PlayerMovement : MonoBehaviour
     public GameObject[] Items = new GameObject[7];
 
     public Button AbilityBut, ItemBut;
+
+    public Text GoldCountp1;
+    public Text GoldCountp2;
+    public Text GoldCountp3;
+    public Text GoldCountp4;
+
+    public GameObject tempItem;
     void Start()
     {
         //initializes piece position
@@ -85,6 +92,10 @@ public class PlayerMovement : MonoBehaviour
         _board.initTilePositionGreen();
         _board.initTilePositionYellow();
         _text.text = "Choose an action";
+        GoldCountp1.text = "" + _player[0].GetGold();
+        GoldCountp2.text = "" + _player[1].GetGold();
+        GoldCountp3.text = "" + _player[2].GetGold();
+        GoldCountp4.text = "" + _player[3].GetGold();
     }
 
     void CheckWin()
@@ -127,7 +138,10 @@ public class PlayerMovement : MonoBehaviour
             }
             _text.text = "Choose an Action";
             _text2.text = "You rolled a " + Roll.Item1 + " and a " + Roll.Item2;
-            
+            GoldCountp1.text = "" + _player[0].GetGold();
+            GoldCountp2.text = "" + _player[1].GetGold();
+            GoldCountp3.text = "" + _player[2].GetGold();
+            GoldCountp4.text = "" + _player[3].GetGold();
             if (_tileMovementAmount == 0 && Clicked == true)
             {
                 //rolls die
@@ -196,23 +210,52 @@ public class PlayerMovement : MonoBehaviour
                 {
                     if (_currentPlayer == 0)
                     {
-                        int randomItem = UnityEngine.Random.Range(0, 5);
+                        int randomItem = UnityEngine.Random.Range(0, 6);
+                        for (int i = 0; i < 6; i++)
+                        { 
+                        if (randomItem == i)
+                        {
+                            tempItem = Items[i];
+                        }
+                    }
+
                         SS.AddToInventory1(Items[randomItem]);
                     }
                     if (_currentPlayer == 1)
                     {
-                        int randomItem = UnityEngine.Random.Range(0, 5);
-                        SS.AddToInventory2(Items[randomItem]);
+                        int randomItem = UnityEngine.Random.Range(0, 6);
+                        for (int i = 0; i < 6; i++)
+                        {
+                            if (randomItem == i)
+                            {
+                                tempItem = Items[i];
+                            }
+                        }
+                            SS.AddToInventory2(Items[randomItem]);
                     }
                     if (_currentPlayer == 2)
                     {
-                        int randomItem = UnityEngine.Random.Range(0, 5);
-                        SS.AddToInventory1(Items[randomItem]);
+                        int randomItem = UnityEngine.Random.Range(0, 6);
+                        for (int i = 0; i < 6; i++)
+                        {
+                            if (randomItem == i)
+                            {
+                                tempItem = Items[i];
+                            }
+                        }
+                                SS.AddToInventory1(Items[randomItem]);
                     }
                     if (_currentPlayer == 3)
                     {
-                        int randomItem = UnityEngine.Random.Range(0, 5);
-                        SS.AddToInventory4(Items[randomItem]);
+                        int randomItem = UnityEngine.Random.Range(0, 6);
+                        for (int i = 0; i < 6; i++)
+                        {
+                            if (randomItem == i)
+                            {
+                                tempItem = Items[i];
+                            }
+                        }
+                                    SS.AddToInventory4(Items[randomItem]);
                     }
                     GetItem = true;
 
