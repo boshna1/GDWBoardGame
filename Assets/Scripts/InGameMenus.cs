@@ -86,19 +86,19 @@ public class InGameMenus : MonoBehaviour
         Character = Choop.GetCharacterType();
         for (int x = 0; x <= 3; x++)
         {
-            if  (Character[x] == 0)
+            if  (Character[x] == 0 && _player[0].GetIsPlayerTurn() == true)
             {
                 tempAbility = Instantiate(Ability[0], AbilityTrans[0]);
                 tempAbility2 =Instantiate(Ability[1], AbilityTrans[1]);
                 PlayerPFP[0] = SpritePFP[0];
             }
-            if (Character[x] == 1)
+            if (Character[x] == 1 && _player[0].GetIsPlayerTurn() == true)
             {
                 tempAbility = Instantiate(Ability[2], AbilityTrans[0]);
                 tempAbility2 = Instantiate(Ability[3], AbilityTrans[1]);
                 PlayerPFP[0] = SpritePFP[1];
             }
-            if (Character[x] == 2)
+            if (Character[x] == 2 && _player[0].GetIsPlayerTurn() == true)
             {
                 tempAbility = Instantiate(Ability[4], AbilityTrans[0]);
                 tempAbility2 = Instantiate(Ability[5], AbilityTrans[1]);
@@ -106,61 +106,109 @@ public class InGameMenus : MonoBehaviour
 
             }
 
-            if (Character[x] == 3)
+            if (Character[x] == 3 && _player[1].GetIsPlayerTurn() == true)
             {
                 tempAbility = Instantiate(Ability[0], AbilityTrans[0]);
                 tempAbility2 = Instantiate(Ability[1], AbilityTrans[1]);
                 PlayerPFP[1] = SpritePFP[3];
 
             }
-            if (Character[x] == 4)
+            if (Character[x] == 4 && _player[1].GetIsPlayerTurn() == true)
             {
                 tempAbility = Instantiate(Ability[2], AbilityTrans[0]);
                 tempAbility2 = Instantiate(Ability[3], AbilityTrans[1]);
                 PlayerPFP[1] = SpritePFP[4];
             }
-            if (Character[x] == 5)
+            if (Character[x] == 5 && _player[1].GetIsPlayerTurn() == true)
             {
                 tempAbility = Instantiate(Ability[4], AbilityTrans[0]);
                 tempAbility2 = Instantiate(Ability[5], AbilityTrans[1]);
                 PlayerPFP[1] = SpritePFP[5];
             }
-            if (Character[x] == 6)
+            if (Character[x] == 6 && _player[2].GetIsPlayerTurn() == true)
             {
                 tempAbility = Instantiate(Ability[0], AbilityTrans[0]);
                 tempAbility2 = Instantiate(Ability[0], AbilityTrans[0]);
                 PlayerPFP[2] = SpritePFP[6];
             }
 
-            if (Character[x] == 7)
+            if (Character[x] == 7 && _player[2].GetIsPlayerTurn() == true)
             {
                 tempAbility = Instantiate(Ability[2], AbilityTrans[0]);
                 tempAbility2 = Instantiate(Ability[3], AbilityTrans[1]);
                 PlayerPFP[2] = SpritePFP[7];
             }
-            if (Character[x] == 8)
+            if (Character[x] == 8 && _player[2].GetIsPlayerTurn() == true)
             {
                 tempAbility = Instantiate(Ability[4], AbilityTrans[0]);
                 tempAbility2 = Instantiate(Ability[5], AbilityTrans[1]);
                 PlayerPFP[2] = SpritePFP[8];
             }
 
-            if (Character[x] == 9)
+            if (Character[x] == 9 && _player[3].GetIsPlayerTurn() == true)
             {
                 tempAbility = Instantiate(Ability[0], AbilityTrans[0]);
                 tempAbility2 = Instantiate(Ability[1], AbilityTrans[0]);
                 PlayerPFP[3] = SpritePFP[9];
             }
-            if (Character[x] == 10)
+            if (Character[x] == 10 && _player[3].GetIsPlayerTurn() == true)
             {
                 tempAbility = Instantiate(Ability[2], AbilityTrans[0]);
                 tempAbility2 = Instantiate(Ability[3], AbilityTrans[1]);
                 PlayerPFP[3] = SpritePFP[10];
             }
-            if (Character[x] == 11)
+            if (Character[x] == 11 && _player[3].GetIsPlayerTurn() == true)
             {
                 tempAbility = Instantiate(Ability[4], AbilityTrans[0]);
                 tempAbility2 = Instantiate(Ability[5], AbilityTrans[1]);
+                PlayerPFP[3] = SpritePFP[11];
+            }
+            if (Character[x] == 0)
+            {
+                PlayerPFP[0] = SpritePFP[0];
+            }
+            if (Character[x] == 1)
+            {
+                PlayerPFP[0] = SpritePFP[0];
+            }
+            if (Character[x] == 2)
+            {
+                PlayerPFP[0] = SpritePFP[0];
+            }
+            if (Character[x] == 3)
+            {
+                PlayerPFP[1] = SpritePFP[3];
+            }
+            if (Character[x] == 4)
+            {
+                PlayerPFP[1] = SpritePFP[4];
+            }
+            if (Character[x] == 5)
+            {
+                PlayerPFP[1] = SpritePFP[5];
+            }
+            if (Character[x] == 6)
+            {
+                PlayerPFP[2] = SpritePFP[6];
+            }
+            if (Character[x] == 7)
+            {
+                PlayerPFP[2] = SpritePFP[7];
+            }
+            if (Character[x] == 8)
+            {
+                PlayerPFP[2] = SpritePFP[8];
+            }
+            if (Character[x] == 9)
+            {
+                PlayerPFP[3] = SpritePFP[9];
+            }
+            if (Character[x] == 10)
+            {
+                PlayerPFP[3] = SpritePFP[10];
+            }
+            if (Character[x] == 11)
+            {
                 PlayerPFP[3] = SpritePFP[11];
             }
         }
@@ -186,6 +234,10 @@ public class InGameMenus : MonoBehaviour
         PlayerI4.GetComponent<Button>().enabled = true;
         AbilityBut1.GetComponent<Button>().enabled = false;
         AbilityBut2.GetComponent<Button>().enabled = false;
+        ItemBut1.GetComponent<Button>().enabled = false;
+        ItemBut2.GetComponent<Button>().enabled = false;
+        ItemBut3.GetComponent<Button>().enabled = false;
+        BackButton.GetComponent<Button>().enabled = true;
 
     }
 
@@ -204,7 +256,14 @@ public class InGameMenus : MonoBehaviour
         //Wind blast
         if ((Character[0] == 1 || Character[1] == 4 || Character[2] == 7 || Character[3] == 10) && AbilityUse == 1 && hit == false && _player[Target].GetisImmune() == false)
         {
-            _player[Target].SetPosition(_player[Target].GetPosition() + new Vector2(-2f,0));
+            _player[Target].SetPosition(_player[Target].GetPosition() + new Vector2((-2f),0));
+            _player[Target].SetCurrentTile(_player[Target].GetCurrentTile() - 2);
+            _player[Target].AddPlayerTilePos(-2);
+        }
+        //FrostBeam
+        if ((Character[0] == 1 || Character[1] == 4 || Character[2] == 7 || Character[3] == 10) && AbilityUse == 2 && hit == false && _player[Target].GetisImmune() == false)
+        {
+            _player[Target].AddSpeed(-(_player[Target].GetSpeed() / 2));
         }
         //steal
         if ((Character[0] == 2 || Character[1] == 5 || Character[2] == 8 || Character[3] == 11) && AbilityUse == 1 && hit == false && _player[Target].GetisImmune() == false)
@@ -318,9 +377,9 @@ public class InGameMenus : MonoBehaviour
     }
     public void GoBackDrop1()
     {
+        tempDrop1.GetComponent<SpriteRenderer>().sortingOrder = 0;
         tempAbility.GetComponent<SpriteRenderer>().sortingOrder = 0;
         tempAbility2.GetComponent<SpriteRenderer>().sortingOrder = 0;
-        tempDrop1.GetComponent<SpriteRenderer>().sortingOrder = 0;
         AbilityBut1.GetComponent<Button>().enabled = false;
         AbilityBut2.GetComponent<Button>().enabled = false;
         BackButton.GetComponent<Button>().enabled = false;
@@ -389,6 +448,8 @@ public class InGameMenus : MonoBehaviour
     {
         
         tempDrop1 = Instantiate(ItemDropdown1, Dropdown1);
+        tempAbility = null;
+        tempAbility2 = null;
         BackBut.text = "Back";
         DropText1.text = "Item";
         currentplayer = PM.GetCurrentPlayer();

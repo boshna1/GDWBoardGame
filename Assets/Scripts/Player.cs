@@ -19,9 +19,9 @@ public class Player : MonoBehaviour
 
     bool immune;
 
-    GameObject[] Item = new GameObject[3];
-
     int speed;
+
+    int currentplayer;
 
 
     private void Start()
@@ -105,4 +105,5 @@ public class Player : MonoBehaviour
     {
         return speed;
     }
+
 }

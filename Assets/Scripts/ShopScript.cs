@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEditor.Progress;
 
@@ -11,12 +12,9 @@ public class ShopScript : MonoBehaviour
     public GameObject[] items;
     public GameObject[] displayItems;
 
-    private List<Vector2> displayLocations = new List<Vector2>() { new Vector2(-2.97f, -2.94f), new Vector2(-0.3f, -2.94f), new Vector2(2.37f, -2.94f) };
+    [SerializeField] private Transform[] displayLocations = new Transform[4];
 
-    public PlayerMovement playerMovement = new PlayerMovement();
     public int playerTurn;
-
-    
 
     private List<GameObject> inventoryItems1 = new List<GameObject>();
     private List<GameObject> inventoryItems2 = new List<GameObject>();
@@ -25,7 +23,7 @@ public class ShopScript : MonoBehaviour
 
     [SerializeField] private List<Player> _player;
 
-    void DisplayItems()
+    public void DisplayItems()
     {
         tempShop = Instantiate(shop);
         tempShop.transform.position = new Vector2(-0.2959419f, 0.07f);
@@ -33,28 +31,27 @@ public class ShopScript : MonoBehaviour
         for (int i = 0; i < 3; i++)
         {
             int randomItem = UnityEngine.Random.Range(0, 7);
-            displayItems[i] = Instantiate(items[randomItem]);
-            displayItems[i].transform.position = displayLocations[i];
+            displayItems[i] = Instantiate(items[randomItem], displayLocations[i]);
             displayItems[i].AddComponent<ClickableItem>().shopScript = this;
         }
     }
 
     public void OnItemClick(GameObject clickedItem)
     {
-        playerTurn = playerMovement.GetCurrentPlayer();
-        if (playerTurn == 0)
+        
+        if (_player[0].GetIsPlayerTurn() == true)
         {
             AddToInventory1(clickedItem);
         }
-        else if (playerTurn == 1)
+        else if (_player[1].GetIsPlayerTurn() == true)
         {
             AddToInventory2(clickedItem);
         }
-        else if (playerTurn == 2)
+        else if (_player[2].GetIsPlayerTurn() == true)
         {
             AddToInventory3(clickedItem);
         }
-        else if (playerTurn == 3)
+        else if (_player[3].GetIsPlayerTurn() == true)
         {
             AddToInventory4(clickedItem);
         }

@@ -12,6 +12,7 @@ using Unity.VisualScripting;
 using System.Numerics;
 using Vector2 = UnityEngine.Vector2;
 using Random = UnityEngine.Random;
+using UnityEditorInternal.Profiling.Memory.Experimental;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -22,7 +23,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private List<Player> _player;
     public float _speed;
 
-    ShopScript SS = new ShopScript();
+    [SerializeField] private ShopScript SS = new ShopScript();
 
     //initializes board and text 
     [SerializeField] private Board _board;
@@ -68,6 +69,14 @@ public class PlayerMovement : MonoBehaviour
     int playerspot;
 
     bool Interacted;
+
+    bool GetItem;
+
+    bool UseUtility;
+
+    public GameObject[] Items = new GameObject[7];
+
+    public Button AbilityBut, ItemBut;
     void Start()
     {
         //initializes piece position
@@ -118,7 +127,7 @@ public class PlayerMovement : MonoBehaviour
             }
             _text.text = "Choose an Action";
             _text2.text = "You rolled a " + Roll.Item1 + " and a " + Roll.Item2;
-            SetCurrentPlayer(_currentPlayer);
+            
             if (_tileMovementAmount == 0 && Clicked == true)
             {
                 //rolls die
@@ -132,7 +141,8 @@ public class PlayerMovement : MonoBehaviour
                 _turnStarted = true;
                 Clicked = false;
                 Interacted = false;
-
+                SetAbilityFalseButton();
+                SetItemFalseButton();
 
             }
 
@@ -151,9 +161,15 @@ public class PlayerMovement : MonoBehaviour
             if (_tileMovementAmount == 0 && _turnStarted == true && Interacted == false)
             {
                 CheckTileInteract();
+                if (playerspot == 1)
+                {
+                    SS.DisplayItems();
+                }
                 if (playerspot == 3)
                 {
                     _player[_currentPlayer].SetPosition(_player[_currentPlayer].GetPosition() + new Vector2(-1f, 0f));
+                    _player[_currentPlayer].SetCurrentTile(_player[_currentPlayer].GetCurrentTile() - 1);
+                    _player[_currentPlayer].AddPlayerTilePos(-1);
                 }
                 if (_player[_currentPlayer].GetPosition().x < -5)
                 {
@@ -167,6 +183,8 @@ public class PlayerMovement : MonoBehaviour
                 }
                 if (playerspot == 4)
                 {
+                    _player[_currentPlayer].SetCurrentTile(_player[_currentPlayer].GetCurrentTile() + 1);
+                    _player[_currentPlayer].AddPlayerTilePos(1);
                     _tileMovementAmount = 1;
                     _isMoving = false;
                 }
@@ -174,8 +192,29 @@ public class PlayerMovement : MonoBehaviour
                 {
                     _player[_currentPlayer].AddGold(-3);
                 }
-                if (playerspot == 6)
+                if (playerspot == 6 && GetItem == true)
                 {
+                    if (_currentPlayer == 0)
+                    {
+                        int randomItem = UnityEngine.Random.Range(0, 5);
+                        SS.AddToInventory1(Items[randomItem]);
+                    }
+                    if (_currentPlayer == 1)
+                    {
+                        int randomItem = UnityEngine.Random.Range(0, 5);
+                        SS.AddToInventory2(Items[randomItem]);
+                    }
+                    if (_currentPlayer == 2)
+                    {
+                        int randomItem = UnityEngine.Random.Range(0, 5);
+                        SS.AddToInventory1(Items[randomItem]);
+                    }
+                    if (_currentPlayer == 3)
+                    {
+                        int randomItem = UnityEngine.Random.Range(0, 5);
+                        SS.AddToInventory4(Items[randomItem]);
+                    }
+                    GetItem = true;
 
                 }
                 if (playerspot == 7)
@@ -184,28 +223,35 @@ public class PlayerMovement : MonoBehaviour
                 }
                 playerspot = 0;
                 Interacted = true;
+
             }
 
             if (_tileMovementAmount == 0 && !_isMoving && Interacted == true)
             {
 
                 _text.text = "Choose an Action";
-
+                
 
                 if (_turnStarted)
                 {
                     _turnStarted = false;
                     Interacted = false;
+                    _player[_currentPlayer].SetisImmune(false);
+                    _player[_currentPlayer].SetIsPlayerTurn(false);
 
                     if (_currentPlayer == 3 && !_isMoving)
                     {
                         _currentPlayer = 0;
-
                     }
                     else
                         _currentPlayer++;
                 }
-                _player[_currentPlayer].SetisImmune(false);
+                Debug.Log(_currentPlayer);
+                SetCurrentPlayer(_currentPlayer );
+                _player[_currentPlayer].SetIsPlayerTurn(true);
+                GetItem = false;
+                SetAbilityTrueButton();
+                SetItemTrueButton();
             }
         }
     }
@@ -309,6 +355,25 @@ public class PlayerMovement : MonoBehaviour
         return _currentPlayer;
     }
 
+    public void SetAbilityFalseButton()
+    {
+        AbilityBut.GetComponent<Button>().enabled = false;
+    }
+
+    public void SetItemFalseButton()
+    {
+        ItemBut.GetComponent<Button>().enabled = false;
+    }
+
+    public void SetAbilityTrueButton()
+    {
+        AbilityBut.GetComponent<Button>().enabled = true;
+    }
+
+    public void SetItemTrueButton()
+    {
+        ItemBut.GetComponent<Button>().enabled = true;
+    }
 }
 
 
