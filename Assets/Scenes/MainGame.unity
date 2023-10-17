@@ -3720,7 +3720,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: fd71a2e7220472f40beb217b019ca5eb, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0
+  m_Volume: 1
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -4204,6 +4204,7 @@ MonoBehaviour:
   GoldCountp2: {fileID: 225492831}
   GoldCountp3: {fileID: 1951084311}
   GoldCountp4: {fileID: 2108988616}
+  tempItem: {fileID: 0}
 --- !u!114 &739694795
 MonoBehaviour:
   m_ObjectHideFlags: 0
